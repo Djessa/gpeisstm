@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 Personal::Personal()
@@ -11,28 +12,56 @@ Personal::Personal()
 }
 void Personal::select_all()
 {
-    string fn = "" , ln, line;
+    string fn = "" , ln, line, ima("");
+    bool im(true), first(false);
     ifstream file("personal");
     printf("+------------------------------------------------------------+\n");
     printf("|   IM   |           NOM           |         PRENOM          |\n");
     printf("+------------------------------------------------------------+\n");
     while(getline(file, line))
     {
-        printf("|   %c    |", line[0]);
         fn = "";
-        for(int i(2); i < line.size(); i++)
+        im = true;
+        first = false;
+        ima = "";
+        for(int i(0); i < line.size(); i++)
         {
-            if(line[i] == ',') {
-                ln = line.substr(i+1);
-                    break;
+            if(im) {
+                if(line[i] == ','){
+                    im = false;
+                    first = true;
+                    continue;
+                } else {
+                    ima += line[i];
                 }
-            fn += line[i];
+
+            }
+            else if(first){
+                if(line[i] == ','){
+                    first = false;
+                } else {
+                    fn += line[i];
+                }
+            }
+            else {
+                ln = line.substr(i);
+                break;
+            }
         }
-        int len_fn = 0, len_ln = 0, add_fn = 0, add_ln = 0;
+        int len_im(0), len_fn = 0, len_ln = 0, add_im(0), add_fn = 0, add_ln = 0;
         len_fn = 25 - fn.size();
+        len_im = 8 - ima.size();
+        add_im = (len_im % 2 == 0) ? 0 : 1;
         len_ln = 25- ln.size();
         add_fn = (len_fn % 2 == 0) ? 0 : 1;
         add_ln = (len_ln % 2 == 0) ? 0 : 1;
+        printf("|");
+        for(int i(0); i < (len_im/2); i++)
+            printf(" ");
+        cout << ima ;
+        for(int i(0); i < (len_im/2)+add_im; i++)
+            printf(" ");
+        printf("|");
         for(int i(0); i < (len_fn/2); i++)
             printf(" ");
         cout << fn ;
@@ -55,18 +84,25 @@ int Personal::search_personal()
     char im(' ');
     string fn = "" , ln, line;
     ifstream file("personal");
-    char im_input;
+    string im_input;
     cout << "\nEntrer le IM du PAT : ";
     cin >> im_input;
+    printf("+-----------------------------------------+\n");
+    printf("|         NOM        |       PRENOM        |\n");
+    printf("+--------------------+---------------------+\n");
     while(getline(file, line))
     {
-        im = line[0];
-        if(im == im_input)
+        string tmp = "";
+        for(int it(0); it < line.size(); it++)
         {
-            printf("+-----------------------------------------+\n");
-            printf("|         NOM        |       PRENOM        |\n");
-            printf("+--------------------+---------------------+\n");
-            for(int i(2); i < line.size(); i++)
+            if(line[it] == ',')
+                break;
+            tmp += line[it];
+        }
+        if(tmp == im_input)
+        {
+            bool fist(true);
+            for(int i(tmp.size()+1); i < line.size(); i++)
             {
                 if(line[i] == ',') {
                     ln = line.substr(i+1);
@@ -138,29 +174,58 @@ int Personal::delete_personal()
     cin >> i_matricule;
     cin.ignore();
     cout << "\tEntrer le nom du PAT a supprimer : ";
-    cin >> first_name;
+    getline(cin, first_name);
     int i(0);
     Personal persons[Personal::total()];
     string line;
     while(getline(file, line))
     {
-        persons[i].m_i_matricule =  line[0]-48;
-        string fn = "";
-        for(int j(2); j < line.size(); j++)
+        bool im = true, first = false;
+        string ima("");
+        for(int j(0); j< line.size(); j++)
         {
-            if(line[j] == ',') {
-                persons[i].m_last_name = line.substr(j+1);
+            if(im) {
+                if(line[j] == ','){
+                    im = false;
+                    stringstream ss;
+                    ss << ima;
+                    ss >> persons[i].m_i_matricule;
+                    first = true;
+                    continue;
+                } else {
+                    ima += line[j];
+                }
+
+            }
+            else if(first){
+                if(line[j] == ','){
+                    first = false;
+                } else {
+                    persons[i].m_first_name += line[j];
+                }
+            }
+            else {
+                persons[i].m_last_name = line.substr(j);
                 break;
             }
-            fn += line[j];
         }
-        persons[i].m_first_name = fn;
         if(persons[i].m_i_matricule == i_matricule && persons[i].m_first_name != first_name)
         {
             cout << "\n\tImpossible de supprimer : (Le nom ne correspond pas a cette IM)\n"<<endl;
             return 0;
         }
         i++;
+    }
+    bool error(true);
+    for(int it(0); it  < i; it++)
+    {
+        if(persons[it].m_i_matricule == i_matricule)
+            error = false;
+    }
+    if(error)
+    {
+        cout << "\n\tImpossible de supprimer : IM n'existe pas\n" << endl;
+        return 0;
     }
     file.close();
     ofstream fileSuppression("personal");
@@ -197,7 +262,17 @@ void Personal::add()
         string line;
         while(getline(fichier, line))
         {
-            int i_ma = line[0]-48;
+            string tmp = "";
+            for(int it(0); it < line.size(); it++)
+            {
+                if(line[it] == ',')
+                    break;
+                tmp += line[it];
+            }
+            stringstream ss;
+            ss << tmp;
+            int i_ma;
+            ss >> i_ma;
             if(i_matricule ==  i_ma){
                 cout << " Ce IM existe deja"<<endl;
                 i_matricule_ok = true;

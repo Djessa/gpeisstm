@@ -17,3 +17,10 @@
 1608910988 c:\users\zo\projects\gpeisstm\include\student.h
 	<string>
 
+1608912603 source:c:\users\zo\projects\gpeisstm\src\student.cpp
+	"Student.h"
+	<string>
+	<iostream>
+	<stdio.h>
+	<fstream>
+
