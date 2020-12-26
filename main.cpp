@@ -31,7 +31,9 @@ int main()
             case 1: Personal::add();break;
             case 2: Student::add();break;
             case 3: Personal::delete_personal();break;
+            case 4: Student::delete_student();break;
             case 5: Personal::delete_all();break;
+            case 6: Student::delete_all();break;
             case 7:
                 cout << "\n0.Chercher un PAT";
                 cout << "\n1.Chercher un etudiant";
@@ -42,8 +44,14 @@ int main()
                 {
                     Personal::search_personal();
                 }
+                else if(prompt == 1)
+                {
+                    Student::search_student();
+                }
                 break;
             case 8:Personal::select_all();break;
+            case 9:Student::select_all();break;
+            case 10:Student::select_mention();break;
         }
     }
     return 0;

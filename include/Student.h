@@ -13,17 +13,19 @@ class Student
         std::string get_card();
         void set_card(std::string const card);
         virtual ~Student();
-    static void add();
+    static int add();
     static int delete_student();
     static void delete_all();
     static int  total();
     static int search_student();
     static void select_all();
+    static int select_mention();
 
     private:
         std::string m_first_name;
         std::string m_last_name;
         std::string m_card;
+        std::string m_mention;
 };
 
 #endif // STUDENT_H
