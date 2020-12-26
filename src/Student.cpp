@@ -1,14 +1,13 @@
-#include "Personal.h"
+#include "Student.h"
 #include <string>
 #include <iostream>
 #include <stdio.h>
 #include <fstream>
 using namespace std;
-
-Personal::Personal()
+Student::Student()
 {
     //ctor
-}
+}/*
 void Personal::select_all()
 {
     string fn = "" , ln, line;
@@ -178,41 +177,50 @@ int Personal::delete_personal()
     cout << endl << "\t----------Suppression reussie----------\n" << endl;
     return 0;
 }
-
-void Personal::add()
+*/
+void Student::add()
 {
-    string first_name, last_name;
-    int i_matricule, i_m;
-    bool i_matricule_ok = false;
+    string first_name, last_name, mention;
+    string card, c;
+    bool card_ok = false;
     ifstream fichier;
-    ofstream file ("personal", ios::app);
+    ofstream file;
     cout << endl;
     do
     {
-        i_matricule_ok = false;
-        cout << "\tEntrer le IM du PAT : ";
-        cin >> i_matricule;
+        card_ok = false;
+        cout << "\tNumero de carte etudiant : ";
+        cin >> card;
         cin.ignore();
-        fichier.open("personal");
+        fichier.open("student");
         string line;
         while(getline(fichier, line))
         {
-            int i_ma = line[0]-48;
-            if(i_matricule ==  i_ma){
+            string i_ma("");
+            for(int k(0); k < line.size(); k++)
+            {
+                if(line[k] == ',')
+                    break;
+                i_ma += line[k];
+            }
+            if(card ==  i_ma){
                 cout << " Ce IM existe deja"<<endl;
-                i_matricule_ok = true;
+                card_ok = true;
                 break;
             }
         }
         fichier.close();
-    }while(i_matricule_ok);
-    cout << "\tEntrer le nom du PAT : ";
+    }while(card_ok);
+    cout << "\tEntrer le nom de l'etudiant : ";
     getline(cin, first_name);
-    cout << "\tEntrer le prenom du PAT : ";
+    cout << "\tEntrer le prenom de l'etudiant : ";
     getline(cin, last_name);
+    cout << "\tMention : ";
+    getline(cin, mention);
+    file.open(mention.c_str(), ios::app);
     if(file)
     {
-        file  << i_matricule << "," << first_name  << "," << last_name << endl;
+        file  << card << "," << first_name  << "," << last_name << endl;
         cout << endl << "\t----------Ajout reussie----------" << endl;
     }
     else
@@ -222,34 +230,33 @@ void Personal::add()
     cout << endl;
     file.close();
 }
-string Personal::get_first_name()
+string Student::get_first_name()
 {
     return m_first_name;
 }
 
-void Personal::set_first_name(string const first_name)
+void Student::set_first_name(string const first_name)
 {
     m_first_name = first_name;
 }
 
-string Personal::get_last_name()
+string Student::get_last_name()
 {
     return m_last_name;
 }
-void Personal::set_last_name(string const last_name)
+void Student::set_last_name(string const last_name)
 {
     m_last_name = last_name;
 }
-int Personal::get_i_matricule()
+string Student::get_card()
 {
-    return m_i_matricule;
+    return m_card;
 }
-void Personal::set_i_matricule(int const i_matricule)
+void Student::set_card(string const card)
 {
-    m_i_matricule = i_matricule;
+    m_card = card;
 }
-
-Personal::~Personal()
+Student::~Student()
 {
     //dtor
 }

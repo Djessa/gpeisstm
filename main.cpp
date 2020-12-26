@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Personal.h"
-
+#include "Student.h"
 using namespace std;
 
 int main()
@@ -29,8 +29,21 @@ int main()
         switch(choice)
         {
             case 1: Personal::add();break;
+            case 2: Student::add();break;
             case 3: Personal::delete_personal();break;
             case 5: Personal::delete_all();break;
+            case 7:
+                cout << "\n0.Chercher un PAT";
+                cout << "\n1.Chercher un etudiant";
+                int prompt;
+                cout << "\n>> ";
+                cin >> prompt;
+                if(prompt == 0)
+                {
+                    Personal::search_personal();
+                }
+                break;
+            case 8:Personal::select_all();break;
         }
     }
     return 0;

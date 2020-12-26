@@ -1,14 +1,19 @@
 # depslib dependency file v1.0
-1608845382 source:c:\users\zo\projects\gpeisstm\main.cpp
+1608910510 source:c:\users\zo\projects\gpeisstm\main.cpp
 	<iostream>
 	"Personal.h"
+	"Student.h"
 
-1608845382 c:\users\zo\projects\gpeisstm\include\personal.h
+1608906585 c:\users\zo\projects\gpeisstm\include\personal.h
 	<string>
 
-1608844405 source:c:\users\zo\projects\gpeisstm\src\personal.cpp
+1608909563 source:c:\users\zo\projects\gpeisstm\src\personal.cpp
 	"Personal.h"
 	<string>
 	<iostream>
+	<stdio.h>
 	<fstream>
+
+1608910988 c:\users\zo\projects\gpeisstm\include\student.h
+	<string>
 
