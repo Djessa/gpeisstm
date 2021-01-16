@@ -4,8 +4,12 @@
 	"Personal.h"
 	"Student.h"
 
+1608979757 "
+
 1608906585 c:\users\zo\projects\gpeisstm\include\personal.h
 	<string>
+
+1608912603 
 
 1608974191 source:c:\users\zo\projects\gpeisstm\src\personal.cpp
 	"Personal.h"
@@ -19,6 +23,32 @@
 	<string>
 
 1608912603 source:c:\users\zo\projects\gpeisstm\src\student.cpp
+	"Student.h"
+	<string>
+	<iostream>
+	<stdio.h>
+	<fstream>
+
+1608979757 source:/home/zo/gpeisstm/main.cpp
+	<iostream>
+	"Personal.h"
+	"Student.h"
+
+1608906585 /home/zo/gpeisstm/include/Personal.h
+	<string>
+
+1608979491 /home/zo/gpeisstm/include/Student.h
+	<string>
+
+1609272815 source:/home/zo/gpeisstm/src/Personal.cpp
+	"Personal.h"
+	<string>
+	<iostream>
+	<stdio.h>
+	<fstream>
+	<sstream>
+
+1609272830 source:/home/zo/gpeisstm/src/Student.cpp
 	"Student.h"
 	<string>
 	<iostream>

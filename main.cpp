@@ -6,13 +6,13 @@ using namespace std;
 int main()
 {
     int choice = 0;
-    cout << "\n*************************************\n\n" <<endl;
+    cout << "*************************************" <<endl;
     cout << "         Bienvenue au GPEISSTM\n" << endl;
-    cout << "            Logiciel ISSTM\n\n" << endl;
+    cout << "            Logiciel ISSTM" << endl;
     cout << "*************************************\n" <<endl;
     while(choice != 11)
     {
-        cout << "Menu principale (I):\n\n" <<endl;
+        cout << "Menu principale (I):\n" <<endl;
         cout << "1.Ajouter nouveau PAT" <<endl;
         cout << "2.Ajouter nouveau Etudiant" <<endl;
         cout << "3.Supprimer un PAT" << endl;

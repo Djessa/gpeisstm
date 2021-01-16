@@ -348,7 +348,7 @@ int Student::delete_student()
     }
     file.close();
     ofstream fileSuppression("student");
-    fileSuppression<"";
+    fileSuppression<<"";
     fileSuppression.close();
     ofstream fileInsertion("student", ios::app);
     for(int j(0); j < i; j++)

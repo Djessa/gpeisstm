@@ -229,7 +229,7 @@ int Personal::delete_personal()
     }
     file.close();
     ofstream fileSuppression("personal");
-    fileSuppression<"";
+    fileSuppression<<"";
     fileSuppression.close();
     ofstream fileInsertion("personal", ios::app);
     for(int j(0); j < i; j++)
