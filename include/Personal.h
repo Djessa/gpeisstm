@@ -1,7 +1,10 @@
 #ifndef PERSONAL_H
 #define PERSONAL_H
 #include <string>
-
+/**
+* 26/12/2020
+* author: Djessa
+**/
 class Personal
 {
     public:

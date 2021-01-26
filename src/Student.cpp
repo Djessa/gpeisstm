@@ -4,13 +4,18 @@
 #include <stdio.h>
 #include <fstream>
 using namespace std;
+/**
+* 25/12/2020
+* author: Djessa
+**/
 Student::Student()
 {
     //ctor
 }
 int Student::select_mention()
 {
-    string mention("");
+
+    string mention("");//variable pour stocker le   mention selectioné
     int t(0);
     cout << "\tMention : \n";
     cout << "\t1.Genie industriel" << endl;
@@ -34,10 +39,10 @@ int Student::select_mention()
     }
     string fn = "" , ln, line, ima("");
     bool im(true), first(false), last(false);
-    ifstream file("student");
-    printf("+------------------------------------------------------------+\n");
-    printf("|   NUMERO   |           NOM           |         PRENOM          |\n");
-    printf("+------------------------------------------------------------+\n");
+    ifstream file("student"); // open file
+    printf("+-----------------------------------------------------------------------------+\n");
+    printf("|          NUMERO         |           NOM           |         PRENOM          |\n");
+    printf("+-----------------------------------------------------------------------------+\n");
     while(getline(file, line))
     {
         fn = "";
@@ -48,6 +53,7 @@ int Student::select_mention()
         string ment = "";
         for(int i(0); i < line.size(); i++)
         {
+            // saisir le IM dans le variable ima
             if(im) {
                 if(line[i] == ','){
                     im = false;
@@ -58,6 +64,7 @@ int Student::select_mention()
                 }
 
             }
+            // saisir le first name  dans le variable fn
             else if(first){
                 if(line[i] == ','){
                     first = false;
@@ -67,6 +74,7 @@ int Student::select_mention()
                     fn += line[i];
                 }
             }
+            // saisir le last name dans le variable ln
             else {
                  if(line[i] == ','){
                      ment = line.substr(i+1);
@@ -76,16 +84,15 @@ int Student::select_mention()
                 }
             }
         }
+        // si le mention en cours sur  le fichier n'est pas le mention selectioné
         if(mention != ment )
             continue;
         t++;
+        // On va bien  placé le resultat
         int len_im(0), len_fn = 0, len_ln = 0, add_im(0), add_fn = 0, add_ln = 0;
-        len_fn = 25 - fn.size();
-        len_im = 8 - ima.size();
+        // Affichage de IM
+        len_im = 25 - ima.size();
         add_im = (len_im % 2 == 0) ? 0 : 1;
-        len_ln = 25- ln.size();
-        add_fn = (len_fn % 2 == 0) ? 0 : 1;
-        add_ln = (len_ln % 2 == 0) ? 0 : 1;
         printf("|");
         for(int i(0); i < (len_im/2); i++)
             printf(" ");
@@ -93,31 +100,38 @@ int Student::select_mention()
         for(int i(0); i < (len_im/2)+add_im; i++)
             printf(" ");
         printf("|");
+        // Affichage de Nom
+        len_fn = 25 - fn.size();
+        add_fn = (len_fn % 2 == 0) ? 0 : 1;
         for(int i(0); i < (len_fn/2); i++)
             printf(" ");
         cout << fn ;
         for(int i(0); i < (len_fn/2)+add_fn; i++)
             printf(" ");
         printf("|");
+        // Affichage de Prenom
+        len_ln = 25- ln.size();
+        add_ln = (len_ln % 2 == 0) ? 0 : 1;
         for(int i(0); i < (len_ln/2); i++)
             printf(" ");
         cout << ln ;
         for(int i(0); i < (len_ln/2)+add_ln; i++)
             printf(" ");
         printf("|\n");
-        printf("+------------------------------------------------------------+\n");
+        printf("+-----------------------------------------------------------------------------+\n");
     }
     cout << "\n Total : " << t << "\n\n";
     file.close();
 }
 void Student::select_all()
 {
-    string fn = "" , ln, line, ima("");
+    string fn = "" , ln(""), ima("");
+    string  line("");
     bool im(true), first(false), last(false);
     ifstream file("student");
-    printf("+------------------------------------------------------------+\n");
-    printf("|   NUMERO   |           NOM           |         PRENOM          |\n");
-    printf("+------------------------------------------------------------+\n");
+    printf("+-----------------------------------------------------------------------------+\n");
+    printf("|        NUMERO           |           NOM           |         PRENOM          |\n");
+    printf("+-----------------------------------------------------------------------------+\n");
     while(getline(file, line))
     {
         fn = "";
@@ -155,12 +169,9 @@ void Student::select_all()
             }
         }
         int len_im(0), len_fn = 0, len_ln = 0, add_im(0), add_fn = 0, add_ln = 0;
-        len_fn = 25 - fn.size();
-        len_im = 8 - ima.size();
+        // Affichage de IM
+        len_im = 25 - ima.size();
         add_im = (len_im % 2 == 0) ? 0 : 1;
-        len_ln = 25- ln.size();
-        add_fn = (len_fn % 2 == 0) ? 0 : 1;
-        add_ln = (len_ln % 2 == 0) ? 0 : 1;
         printf("|");
         for(int i(0); i < (len_im/2); i++)
             printf(" ");
@@ -168,26 +179,33 @@ void Student::select_all()
         for(int i(0); i < (len_im/2)+add_im; i++)
             printf(" ");
         printf("|");
+        // Affichage de NOM
+        len_fn = 25 - fn.size();
+        add_fn = (len_fn % 2 == 0) ? 0 : 1;
         for(int i(0); i < (len_fn/2); i++)
             printf(" ");
         cout << fn ;
         for(int i(0); i < (len_fn/2)+add_fn; i++)
             printf(" ");
         printf("|");
+        // Affichage de Prenom
+        len_ln = 25- ln.size();
+        add_ln = (len_ln % 2 == 0) ? 0 : 1;
         for(int i(0); i < (len_ln/2); i++)
             printf(" ");
         cout << ln ;
         for(int i(0); i < (len_ln/2)+add_ln; i++)
             printf(" ");
         printf("|\n");
-        printf("+------------------------------------------------------------+\n");
+        printf("+-----------------------------------------------------------------------------+\n");
     }
     cout << "\n Total : " << Student::total() << "\n\n";
     file.close();
 }
 int Student::search_student()
 {
-    string fn = "" , ln = "", line, card;
+    string fn = "" , ln = ""; // Variable pour stocker le resultat
+    string  line, card;
     ifstream file("student");
     string card_input;
     cout << "\nEntrer le numero de l'etudiant : ";
@@ -246,7 +264,7 @@ int Student::search_student()
 void Student::delete_all()
 {
     char confirm = 'N';
-    cout << "Voulez-vous vraiment supprimer tous les "<< Student::total()<<" PAT (O/N) :";
+    cout << "Voulez-vous vraiment supprimer tous les "<< Student::total()<<" Etudiant (O/N) :";
     cin >> confirm;
     if(confirm == 'O')
     {

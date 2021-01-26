@@ -1,4 +1,5 @@
 #include <iostream>
+#include <windows.h>
 #include "Personal.h"
 #include "Student.h"
 using namespace std;
@@ -6,12 +7,13 @@ using namespace std;
 int main()
 {
     int choice = 0;
-    cout << "\n*************************************\n\n" <<endl;
-    cout << "         Bienvenue au GPEISSTM\n" << endl;
-    cout << "            Logiciel ISSTM\n\n" << endl;
-    cout << "*************************************\n" <<endl;
     while(choice != 11)
     {
+        system("CLS");
+        cout << "\n*************************************\n\n" <<endl;
+        cout << "         Bienvenue au GPEISSTM\n" << endl;
+        cout << "            Logiciel ISSTM\n\n" << endl;
+        cout << "*************************************\n" <<endl;
         cout << "Menu principale (I):\n\n" <<endl;
         cout << "1.Ajouter nouveau PAT" <<endl;
         cout << "2.Ajouter nouveau Etudiant" <<endl;
@@ -53,6 +55,7 @@ int main()
             case 9:Student::select_all();break;
             case 10:Student::select_mention();break;
         }
+        system("PAUSE");
     }
     return 0;
 }
