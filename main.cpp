@@ -1,15 +1,19 @@
 #include <iostream>
 #include <windows.h>
 #include "Personal.h"
+#include "Isstm.h"
 #include "Student.h"
 using namespace std;
 
 int main()
 {
-    int choice = 0;
-    while(choice != 11)
+    // Le programme principale
+    int choice = 0; // Choix d'entrer pour  differente menu
+    while(true)
     {
         system("CLS");
+        if(total("personal") == 0 && total("student") == 0)
+            cout << "\n<<<<<<  La base de donnees est vide >>>>>>>\n";
         cout << "\n*************************************\n\n" <<endl;
         cout << "         Bienvenue au GPEISSTM\n" << endl;
         cout << "            Logiciel ISSTM\n\n" << endl;
@@ -28,6 +32,7 @@ int main()
         cout << "11.Quitter\n" << endl;
         cout << ">> Entrer votre choix : ";
         cin >> choice;
+        cin.ignore();
         switch(choice)
         {
             case 1: Personal::add();break;
@@ -54,6 +59,15 @@ int main()
             case 8:Personal::select_all();break;
             case 9:Student::select_all();break;
             case 10:Student::select_mention();break;
+            case 11:
+            char boole = '0';
+            cout<< "Voulez vous vraiment quitter le  programme  ?\n0.Oui\n1.Non\n";
+            cout << ">";
+            cin>>boole;
+            if(boole == '0') {
+                return 0;
+            }
+            break;
         }
         system("PAUSE");
     }

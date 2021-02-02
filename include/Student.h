@@ -1,29 +1,23 @@
 #ifndef STUDENT_H
 #define STUDENT_H
+#include "Isstm.h"
 #include <string>
 
-class Student
+class Student:public Isstm
 {
     public:
         Student();
-        std::string get_first_name();
-        void set_first_name(std::string const first_name);
-        std::string get_last_name();
-        void set_last_name(std::string const last_name);
         std::string get_card();
         void set_card(std::string const card);
         virtual ~Student();
     static int add();
     static int delete_student();
     static void delete_all();
-    static int  total();
     static int search_student();
     static void select_all();
     static int select_mention();
 
     private:
-        std::string m_first_name;
-        std::string m_last_name;
         std::string m_card;
         std::string m_mention;
 };
